@@ -8,6 +8,10 @@ class ContentItemPublisher
       flow_content_item = FlowContentItem.new(smart_answer)
       Services.publishing_api.put_content(flow_content_item.content_id, flow_content_item.payload)
       Services.publishing_api.publish(flow_content_item.content_id, 'minor')
+
+      visualise_content_item = VisualiseContentItem.new(smart_answer)
+      Services.publishing_api.put_content(visualise_content_item.content_id, visualise_content_item.payload)
+      Services.publishing_api.publish(visualise_content_item.content_id, 'minor')
     end
   end
 

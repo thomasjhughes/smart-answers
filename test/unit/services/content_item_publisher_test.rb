@@ -7,10 +7,13 @@ class ContentItemPublisherTest < ActiveSupport::TestCase
   end
 
   test 'sending item to content store' do
+    SecureRandom.stubs(:uuid).returns("visualise-content-id")
     start_page_draft_request = stub_request(:put, "https://publishing-api.test.gov.uk/v2/content/3e6f33b8-0723-4dd5-94a2-cab06f23a685")
     start_page_publishing_request = stub_request(:post, "https://publishing-api.test.gov.uk/v2/content/3e6f33b8-0723-4dd5-94a2-cab06f23a685/publish")
     flow_draft_request = stub_request(:put, "https://publishing-api.test.gov.uk/v2/content/154829ba-ad5d-4dad-b11b-2908b7bec399")
     flow_publishing_request = stub_request(:post, "https://publishing-api.test.gov.uk/v2/content/154829ba-ad5d-4dad-b11b-2908b7bec399/publish")
+    visualise_draft_request = stub_request(:put, "https://publishing-api.test.gov.uk/v2/content/visualise-content-id")
+    visualise_publishing_request = stub_request(:post, "https://publishing-api.test.gov.uk/v2/content/visualise-content-id/publish")
 
     presenter = FlowRegistrationPresenter.new(stub('flow', name: 'bridge-of-death', start_page_content_id: '3e6f33b8-0723-4dd5-94a2-cab06f23a685', flow_content_id: '154829ba-ad5d-4dad-b11b-2908b7bec399', external_related_links: nil))
 
@@ -20,6 +23,8 @@ class ContentItemPublisherTest < ActiveSupport::TestCase
     assert_requested start_page_publishing_request
     assert_requested flow_draft_request
     assert_requested flow_publishing_request
+    assert_requested visualise_draft_request
+    assert_requested visualise_publishing_request
   end
 
   context "#unpublish" do
