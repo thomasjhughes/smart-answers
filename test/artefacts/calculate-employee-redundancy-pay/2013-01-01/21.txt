@@ -7,6 +7,6 @@ Only count full years of service. For example, 3 years and 9 months count as 3 y
 
 
 
-full years worked
+
 
 

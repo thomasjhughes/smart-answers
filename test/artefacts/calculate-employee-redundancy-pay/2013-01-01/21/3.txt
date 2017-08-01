@@ -1,4 +1,4 @@
-What is their weekly pay before tax and any other deductions?
+What is their weekly pay before tax and any other deductions (per week)?
 
 
 
@@ -7,6 +7,6 @@ Examples of other deductions include student loans and child maintenance.
 
 
 
-per week
+
 
 
