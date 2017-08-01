@@ -72,7 +72,7 @@ lib/smart_answer_flows/uk-benefits-abroad/outcomes/wfp_not_eligible_outcome.govs
 lib/smart_answer_flows/uk-benefits-abroad/questions/db_claiming_benefits.govspeak.erb: fa4bd1975463c13bd4a69ac04044f2dd
 lib/smart_answer_flows/uk-benefits-abroad/questions/db_how_long_abroad.govspeak.erb: bf3a67acf756a9ed6b8b8dbf1097c21b
 lib/smart_answer_flows/uk-benefits-abroad/questions/do_either_of_the_following_apply.govspeak.erb: 90bee1d05b13335e979d9aff8b11127a
-lib/smart_answer_flows/uk-benefits-abroad/questions/eligible_for_smp.govspeak.erb: 4d5361ac102bb94d1bb618430f0a0683
+lib/smart_answer_flows/uk-benefits-abroad/questions/eligible_for_smp.govspeak.erb: 5438338dada98b187e3d6314c8dee0d5
 lib/smart_answer_flows/uk-benefits-abroad/questions/eligible_for_tax_credits.govspeak.erb: 8fa0384fda217a6fccd31633f4e6f18c
 lib/smart_answer_flows/uk-benefits-abroad/questions/employer_paying_ni.govspeak.erb: 466df71cc013f20814551bdab736402a
 lib/smart_answer_flows/uk-benefits-abroad/questions/esa_how_long_abroad.govspeak.erb: c94a7631a27221b11b7bc9c8b4f777b0
@@ -91,7 +91,7 @@ lib/smart_answer_flows/uk-benefits-abroad/questions/tax_credits_how_long_abroad.
 lib/smart_answer_flows/uk-benefits-abroad/questions/tax_credits_why_going_abroad.govspeak.erb: a9686787f9ddd04fe676352ceff03cbd
 lib/smart_answer_flows/uk-benefits-abroad/questions/which_benefit.govspeak.erb: a9b598ca0de3404184c6e3e0b88d5470
 lib/smart_answer_flows/uk-benefits-abroad/questions/which_country.govspeak.erb: f29a4a18c6596d303cc1d6d474bfd093
-lib/smart_answer_flows/uk-benefits-abroad/questions/working_for_a_uk_employer.govspeak.erb: 8367cff3d1d36a843d6d966a547d179b
+lib/smart_answer_flows/uk-benefits-abroad/questions/working_for_a_uk_employer.govspeak.erb: dd7934faff8ed7c61e4c64ae71a20556
 lib/smart_answer_flows/uk-benefits-abroad/questions/working_for_uk_employer_ssp.govspeak.erb: 15e9162bb80fe215af169d0e39dd53d0
 lib/smart_answer_flows/uk-benefits-abroad/uk_benefits_abroad.govspeak.erb: 289ed7bd184696294095c760f24ffb0d
 lib/smart_answer_flows/uk-benefits-abroad.rb: c75c6839eb1740177ae2993cc94a4760
