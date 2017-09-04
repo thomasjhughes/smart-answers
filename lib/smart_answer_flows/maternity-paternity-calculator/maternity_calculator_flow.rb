@@ -190,7 +190,13 @@ module SmartAnswer
             calculator.average_weekly_earnings
           end
           next_node do
-            question :how_do_you_want_the_smp_calculated?
+            if calculator.weekly?
+              question :how_many_payments_weekly?
+            elsif calculator.monthly?
+              question :how_many_payments_monthly?
+            else
+              question :how_do_you_want_the_smp_calculated?
+            end
           end
         end
 
