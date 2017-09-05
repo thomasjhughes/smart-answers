@@ -319,6 +319,7 @@ module SmartAnswer::Calculators
       context "average_weekly_earnings" do
         setup do
           @calculator = MaternityPaternityCalculator.new(4.months.since(Date.today))
+          @calculator.payment_option = "8"
         end
 
         should "make no calculation for a weekly pay pattern" do
@@ -341,6 +342,7 @@ module SmartAnswer::Calculators
 
         should "work out the weekly average for a monthly pay pattern" do
           @calculator.pay_pattern = "monthly"
+          @calculator.payment_option = "2"
           @calculator.earnings_for_pay_period = 16000
           assert_equal 1846.15385, @calculator.average_weekly_earnings
         end
@@ -348,6 +350,7 @@ module SmartAnswer::Calculators
       context "HMRC scenarios" do
         setup do
           @calculator = MaternityPaternityCalculator.new(Date.parse("2013-02-22"))
+          @calculator.payment_option = "8"
         end
 
         should "calculate AWE for weekly pay patterns" do
@@ -361,6 +364,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate AWE for monthly pay patterns" do
+          @calculator.payment_option = "2"
           @calculator.last_payday = Date.parse("2012-10-31")
           @calculator.pay_pattern = "monthly"
           @calculator.earnings_for_pay_period = 1600
@@ -540,6 +544,7 @@ module SmartAnswer::Calculators
           @calculator.pay_method = 'weekly'
           @calculator.pay_pattern = 'weekly'
           @calculator.earnings_for_pay_period = 2000
+          @calculator.payment_option = "8"
 
           paydates_and_pay = @calculator.paydates_and_pay
           assert_equal 40, paydates_and_pay.size
@@ -560,6 +565,7 @@ module SmartAnswer::Calculators
           @calculator.pay_method = 'every_2_weeks'
           @calculator.pay_pattern = 'weekly'
           @calculator.earnings_for_pay_period = 2000
+          @calculator.payment_option = "8"
 
           paydates_and_pay = @calculator.paydates_and_pay
 
@@ -789,6 +795,7 @@ module SmartAnswer::Calculators
           @calculator.leave_start_date = Date.parse('20 January 2014')
           @calculator.pay_pattern = 'monthly'
           @calculator.earnings_for_pay_period = 3000
+          @calculator.payment_option = "2"
           paydates_and_pay = @calculator.paydates_and_pay
 
           expected_pay_dates = [
@@ -819,6 +826,7 @@ module SmartAnswer::Calculators
           @calculator.pre_offset_payday = Date.parse('31 Jan 2015')
           @calculator.last_payday = Date.parse('31 Mar 2015')
           @calculator.adoption_placement_date = Date.parse('10 Apr 2015')
+          @calculator.payment_option = "2"
         end
 
         should "calculate 39 weeks of dates and pay, first 6 weeks is 90% of avg weekly pay, \
@@ -846,6 +854,7 @@ module SmartAnswer::Calculators
           @calculator.pay_week_in_month = 'last'
           @calculator.pay_pattern = 'monthly'
           @calculator.earnings_for_pay_period = 3000
+          @calculator.payment_option = "2"
           paydates_and_pay = @calculator.paydates_and_pay
 
           expected_pay_dates = [
@@ -917,6 +926,82 @@ module SmartAnswer::Calculators
         should "return false if leave_type isn't set to adoption" do
           calculator = MaternityPaternityCalculator.new(Date.parse("04 Sept 2017"), "maternity")
           refute calculator.adoption?
+        end
+      end
+
+      context "#number_of_payments" do
+        setup do
+          @calculator = MaternityPaternityCalculator.new(Date.parse("04 Sept 2017"), "maternity")
+        end
+
+        should "return supplied payment_option when pay pattern is monthly" do
+          @calculator.pay_pattern = "monthly"
+          @calculator.payment_option = "3"
+
+          assert_equal 3, @calculator.number_of_payments
+        end
+
+        should "return supplied payment_option when pay pattern is weekly" do
+          @calculator.pay_pattern = "weekly"
+          @calculator.payment_option = "9"
+
+          assert_equal 9, @calculator.number_of_payments
+        end
+
+        should "return 2 when pay pattern is monthly and payment_option is set to non Numeric value" do
+          @calculator.pay_pattern = "monthly"
+          @calculator.payment_option = "invalid_numeral"
+
+          assert_equal 2, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is weekly and payment_option is set to non Numeric value" do
+          @calculator.pay_pattern = "weekly"
+          @calculator.payment_option = "invalid_numeral"
+
+          assert_equal 8, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is every_2_weeks and payment_option is set to non Numeric value" do
+          @calculator.pay_pattern = "every_2_weeks"
+          @calculator.payment_option = "invalid_numeral"
+
+          assert_equal 8, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is every_4_weeks and payment_option is set to non Numeric value" do
+          @calculator.pay_pattern = "every_4_weeks"
+          @calculator.payment_option = "invalid_numeral"
+
+          assert_equal 8, @calculator.number_of_payments
+        end
+
+        should "return 2 when pay pattern is monthly and payment_option isn't set" do
+          @calculator.pay_pattern = "monthly"
+          @calculator.payment_option = nil
+
+          assert_equal 2, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is weekly and payment_option isn't set" do
+          @calculator.pay_pattern = "weekly"
+          @calculator.payment_option = nil
+
+          assert_equal 8, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is every_2_weeks and payment_option isn't set" do
+          @calculator.pay_pattern = "every_2_weeks"
+          @calculator.payment_option = nil
+
+          assert_equal 8, @calculator.number_of_payments
+        end
+
+        should "return 8 when pay pattern is every_4_weeks and payment_option isn't set" do
+          @calculator.pay_pattern = "every_4_weeks"
+          @calculator.payment_option = nil
+
+          assert_equal 8, @calculator.number_of_payments
         end
       end
 
