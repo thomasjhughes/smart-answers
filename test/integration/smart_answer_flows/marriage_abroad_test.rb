@@ -577,66 +577,60 @@ class MarriageAbroadTest < ActiveSupport::TestCase
     end
   end
 
-  context "Spain" do
-    setup do
-      add_response 'spain'
-    end
+  context "Marriage ceremony in Spain," do
+    setup { add_response "spain" }
 
-    context "resident in uk, partner british, opposite sex" do
-      setup do
-        add_response 'uk'
-        add_response 'partner_british'
-        add_response 'opposite_sex'
-      end
-      should "go to outcome_ceremonies_in_spain with UK/OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
+    context "resident in uk," do
+      setup { add_response "uk" }
 
-    context "resident in spain, partner local" do
-      setup do
-        add_response 'ceremony_country'
-        add_response 'partner_local'
-        add_response 'opposite_sex'
+      context "opposite sex" do
+        setup { add_response "opposite_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
-      should "go to outcome_ceremonies_in_spain with ceremony country OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
+
+      context "same sex" do
+        setup { add_response "same_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
     end
 
-    context "lives elsewhere, partner opposite sex other" do
-      setup do
-        add_response 'third_country'
-        add_response 'partner_other'
-        add_response 'opposite_sex'
+    context "resident in ceremony country" do
+      setup { add_response "ceremony_country" }
+
+      context "opposite sex" do
+        setup { add_response "opposite_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
 
-      should "go to outcome_ceremonies_in_spain with third country OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-
-    context "resident in england, partner british, same sex" do
-      setup do
-        add_response 'uk'
-        add_response 'partner_british'
-        add_response 'same_sex'
-      end
-
-      should "go to outcome_ceremonies_in_spain with UK/SS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
+      context "same sex" do
+        setup { add_response "same_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
     end
 
-    context "lives elsewhere, partner same sex other" do
-      setup do
-        add_response 'third_country'
-        add_response 'partner_other'
-        add_response 'same_sex'
+    context "resident in third country" do
+      setup { add_response "third_country" }
+
+      context "opposite sex" do
+        setup { add_response "opposite_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
 
-      should "go to outcome_ceremonies_in_spain with third country SS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
+      context "same sex" do
+        setup { add_response "same_sex" }
+        should "go to generic country outcome" do
+          assert_current_node :outcome_marriage_abroad_in_country
+        end
       end
     end
   end
@@ -789,7 +783,7 @@ class MarriageAbroadTest < ActiveSupport::TestCase
 
     context "same sex" do
       setup { add_response "same_sex" }
-      
+
       should "go to generic country outcome" do
         assert_current_node :outcome_marriage_abroad_in_country
       end
@@ -3648,7 +3642,7 @@ class MarriageAbroadTest < ActiveSupport::TestCase
         assert_current_node :outcome_marriage_abroad_in_country
       end
     end
-    
+
     context "same sex" do
       setup { add_response "same_sex" }
       should "go to generic country outcome" do
